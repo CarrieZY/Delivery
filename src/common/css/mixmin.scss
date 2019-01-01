@@ -1,0 +1,58 @@
+//1px的上边框线
+@mixin  top-border-1px($color) {
+    position: relative;
+    &::after{
+        position: absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height:1px;
+        background:$color;
+        display: block;
+        content:'';
+    }
+}
+
+//1px的下边框线
+@mixin bottom-border-1px($color) {
+    position: relative;
+    &::after{
+        position: absolute;
+        bottom:0;
+        left:0;
+        height:1px;
+        width:100%;
+        background:$color;
+        display: block;
+        content:'';
+    }
+}
+//1px的上下边框
+@mixin  border-1px($color) {
+    position: relative;
+    &::after{
+        position: absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height:1px;
+        background:$color;
+        display: block;
+        content:'';
+    }
+    &::before{
+        position: absolute;
+        bottom:0;
+        left:0;
+        height:1px;
+        width:100%;
+        background:$color;
+        display: block;
+        content:'';
+    }
+}
+//px2rem
+$fontSize:16;
+@function px2rem($px){
+    @return $px/$fontSize *1rem;
+}
