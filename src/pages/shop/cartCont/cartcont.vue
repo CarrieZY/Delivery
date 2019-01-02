@@ -1,8 +1,8 @@
 <template>
     <div class="cart-content">
-        <span class="iconfont icon-jianhao" v-show="food.count" @click.stop="addFoodCount(false)"></span>
-        <span>{{food.count}}</span>
-        <span class="iconfont icon-jiahao" @click.stop="addFoodCount(true)"></span>
+        <span class="iconfont icon-jianhao" v-show="food.count" @click.stop="updataFoodCount(false)"></span>
+        <span v-show="food.count">{{food.count}}</span>
+        <span class="iconfont icon-jiahao" @click.stop="updataFoodCount(true)"></span>
     </div>    
 </template>
 
@@ -14,9 +14,10 @@ export default {
         }
     },
     methods:{
-        addFoodCount(isAdd){
-            const {food} =this
-            this.$store.dispatch('addFoodCount',{food,isAdd})    
+        updataFoodCount(isAdd){
+            const {food} = this
+            // console.log({food})
+            this.$store.dispatch('updataFoodCount',{food,isAdd})    
         }
     }
 }
@@ -24,6 +25,7 @@ export default {
 
 <style lang="scss" scoped>
 .cart-content{
+    padding:px2rem(10);
     >span{
         font-size: px2rem(20);
         color:#999;

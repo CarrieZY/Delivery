@@ -32,7 +32,7 @@
         </div>
     </div>
     <foods :food="food"  ref="food" />
-    <shop-cart></shop-cart>
+    <shop-cart :info="info" :food="food"></shop-cart>
 </div>
 </template>
 
@@ -116,6 +116,7 @@ export default {
     created(){
         axios.get('static/data.json').then((res) =>{
             this.goods=res.data.goods
+            this.info = res.data.info
             this.$nextTick(() =>{
                 this._inintScroll()
                 this.calHeight()

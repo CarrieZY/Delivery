@@ -1,34 +1,68 @@
 <template>
+<div>
     <div class="shopcart">
         <div class="cart">
             <div class="logo-cart">
-                <i class="iconfont icon-icon22fuzhi"></i>
+                <i class="iconfont icon-icon22fuzhi" :class="{highlight:totalCount>0}"></i>
+                <div class="num" v-show="totalCount>0">{{totalCount}}</div>
             </div>
         </div>
         <div class="content">
-            <span class="price">￥0</span>
+            <span class="price" :class="{'priceHight':totalPrice>0}">￥{{totalPrice}}</span>
             <span>配送费￥{{info.deliveryPrice}}</span>
         </div>
-        <div class="settle">￥{{info.minPrice}}元起送</div>
+        <div class="settle">{{payText}}</div>
     </div>
+    <div class="shoplist">
+        <div class="shoplist-header">
+            <h1>购物车</h1>
+            <span>清空</span>
+        </div>
+        <div class="shopContent">
+            <ul>
+                <li v-for="(food,index) in shopCart" :key="index">
+                    <span class="name">{{food.name}}</span>
+                    <div class="price"><span>{{food.price*food.count}}</span></div>
+                    <div class="cartcount-warpper">
+                        <cart-count :food="food"></cart-count>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>    
 </template>
 
 <script>
-import axios from 'axios'
-import { mapState } from 'vuex'
+import cartCount from '../cartCont/cartcont'
+import { mapState,mapGetters } from 'vuex'
 export default {
+    components:{
+        cartCount
+    },
+    props:{
+        info:Object,
+        food:Object
+    },
     data(){
         return {
-            info:{}
+            listShow:true
         }
     },
-    mounted(){
-        axios.get('static/data.json').then((res) =>{
-            this.info=res.data.info
-        })
-    },
     computed:{
-        ...mapState(['shopCart'])
+        ...mapState(['shopCart']),
+        ...mapGetters(['totalCount',' totalPrice']),
+        payText(){
+            const {totalPrice} = this
+            const {miniPrice} = this.info
+            if(totalPrice===0){
+                return `￥{{info.minPrice}}元起送`
+            }else if(totalPrice<miniPrice){
+                return `还差￥${miniPrice-totalPrice}元起送`
+            }else{
+                return `去结算`
+            }
+        }
     }
 }
 </script>
@@ -67,6 +101,24 @@ export default {
                 line-height: px2rem(50);
                 font-size: px2rem(30);
                 color:#ccc;
+                &.highlight{
+                    background: green;
+                    color:#fff;
+                }
+            }
+            .num{
+                position: absolute;
+                top:0;
+                right: 0;
+                width:px2rem(24);
+                height:px2rem(16);
+                line-height: px2rem(16);
+                text-align: center;
+                border-radius: px2rem(16);
+                box-shadow: 0 px2rem(4) px2rem(8) 0  rgba(0,0,0,.4);
+                font-size: px2rem(9);
+                color:#fff;
+                background:green;
             }
         }
     }
@@ -82,8 +134,11 @@ export default {
         }
         .price{
             font-size: px2rem(16);
-            color:#fff;
+            color:#ddd;
             font-weight: bold;
+            &.priceHight{
+                color:#fff;
+            }
         }
     }
     .settle{

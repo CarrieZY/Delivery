@@ -12,6 +12,9 @@
             </div>
             <div class="price">
                 <span>￥{{food.price}}</span>
+                <div class="cartCount-wrapper">
+                    <cart-cont :food="food"></cart-cont>
+                </div>
             </div>
         </div>
         <div class="food-mask" @click="toggleShow"></div>
@@ -19,7 +22,11 @@
 </template>
 
 <script>
+import cartCont from '../cartCont/cartcont'
 export default {
+    components:{
+        cartCont
+    },
     props:{
         food:{
             type:Object
@@ -94,11 +101,17 @@ export default {
         }
         .price{
             width:80%;
-            padding: px2rem(10);
+            padding: px2rem(10) px2rem(10) 0 px2rem(10);
+            position: relative;
             >span{
                 font-size: px2rem(14);
                 color:red;
                 font-weight: bold;
+            }
+            .cartCount-wrapper{
+                position: absolute;
+                bottom:0;
+                right:0;
             }
         }
     }
