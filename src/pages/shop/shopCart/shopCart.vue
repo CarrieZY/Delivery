@@ -17,7 +17,7 @@
     <div class="shoplist" v-show="ShowShoplist" >
         <div class="shoplist-header">
             <span class="title">购物车</span>
-            <span class="clear">清空</span>
+            <span class="clear" @click="clear">清空</span>
         </div>
         <div class="shopContent" ref="shopContent">
             <ul>

@@ -16,7 +16,7 @@ export default {
         if(food.count){
             food.count--
             if(food.count===0){ //如果数量为0时 从购物车中移除
-                state.foodsCart.splice(state.shopCart.indexOf(food),1)
+                state.foodsCart.splice(state.foodsCart.indexOf(food),1)
             }
         }
     },

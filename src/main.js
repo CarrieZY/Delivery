@@ -5,6 +5,7 @@ import App from './App'
 import store from './store/store'
 import router from './router'
 import fastclick from 'fastclick'
+import './filters/index'
 
 Vue.config.productionTip = false
 fastclick.attach(document.body)

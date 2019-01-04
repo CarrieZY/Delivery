@@ -56,3 +56,12 @@ $fontSize:16;
 @function px2rem($px){
     @return $px/$fontSize *1rem;
 }
+
+
+//根据像素比显示1倍图和2倍图
+@mixin  bg-img($url){
+    background-image: url($url+"@2x.png");
+    @media (-webkit-min-device-pixel-ratio:3),(min-device-pixel-ratio:3) {
+        background-image: url($url+"@3x.png");
+    }
+}
