@@ -1,3 +1,3 @@
-export const state = {
-    shopCart:[]
+export default {
+    foodsCart:[]
 }

@@ -1,7 +1,9 @@
 <template>
     <div class="shop">
         <shop-header :info="info"></shop-header>
+        <keep-alive>
         <router-view/>
+        </keep-alive>
     </div>
 </template>
 

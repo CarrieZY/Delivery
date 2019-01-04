@@ -32,7 +32,7 @@
         </div>
     </div>
     <foods :food="food"  ref="food" />
-    <shop-cart :info="info" :food="food"></shop-cart>
+    <shop-cart :food="food"></shop-cart>
 </div>
 </template>
 
